@@ -1,0 +1,11 @@
+
+var dan = {
+  firstName: "Joseph Chappell",
+  gitHubId: "photonerddan",
+  gravitarId: "http://www.gravatar.com/avatar/426b9a1c8077d92fb7a15a757d8a85da?s=36"
+},
+var matt = {
+  firstName: "Matt Van Dusen",
+  gitHubId: "imagineux",
+  gravitarId: "https://1.gravatar.com/avatar/9499e17466ab100d9b4b14b382fe6f29?s=36"
+}
