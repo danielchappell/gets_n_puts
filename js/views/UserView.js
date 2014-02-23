@@ -1,10 +1,8 @@
 
-var self = new User({ personName: 'Joseph Chappell', gitHubId: 'photonerddan', gravatarId: "http://www.gravatar.com/avatar/426b9a1c8077d92fb7a15a757d8a85da?s=30"});
-
-
 var UserView = Backbone.View.extend({
 
-  tagName: 'li',
+  tagName:
+  'li',
 
   className: "online_user",
 
@@ -24,9 +22,7 @@ var UserView = Backbone.View.extend({
   },
 
   openChatWindow: function(person){
-    var chatWindow = new ChatRoom({selfObject: self, partnerObject: person.model });
-    var convo = new ConversationView({model: chatWindow, collection: new Conversation});
-
-
+    var chatWindow = new ChatRoom({selfObject: self, partnerObject: this.model });
+    var convo = new ConversationView({model: chatWindow, collection: new Conversation() });
   }
 });

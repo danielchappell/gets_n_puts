@@ -1,3 +1,5 @@
+window.app = new ChatApp();
+
 $(document).ready(function() {
 
 
@@ -112,10 +114,5 @@ $(function(){
   }
   currently_online = new UsersView([dan, matt, bill, gilad, kathryn, denton, patrick, beth, brad, drew, donovan, michael, neil ]);
 
-  var chatRoom = new ChatRoom({ selfObject: self, partnerObject: matt });
 
-  var chatWindow = new ConversationView ({ model: chatRoom, collection: new Conversation})
-
-
-  chatWindow.render();
 });
