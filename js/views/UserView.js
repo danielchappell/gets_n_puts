@@ -29,4 +29,4 @@ var UserView = Backbone.View.extend({
 
 
   }
-});x
+});
