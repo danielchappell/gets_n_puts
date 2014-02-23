@@ -413,9 +413,10 @@ table {
 .top-bar {
   background: #51b85b;
   color: white;
-  padding: 0.4rem;
+  padding: 11px 8px 5px 8px;
   position: relative;
   overflow: hidden;
+  height:43px;
   z-index: 3;
   /* &::before {
      content: "";
@@ -547,6 +548,7 @@ input { outline: none; }
 
 /*off canvas side bar*/
 #utility-nav{
+  width:100%;
   position: absolute;
   bottom: 0;
 }
