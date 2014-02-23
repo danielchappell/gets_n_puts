@@ -1,75 +1,88 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>chat-box</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <script src="app.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+
+  <meta charset="UTF-8">
+
+  <title>makersquare chat</title>
+
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/prefixfree.min.js"></script>
+
+<!--   documentation on this js <a href="http://leaverou.github.io/prefixfree/"> -->
+
 </head>
+
 <body>
-<div class="wrapper">
-    <div class="container">
-    <div class="header" id="chat-toggle">
-         <h2>Gilbert JS</h2>
- <a href="#"id="toggle-close" style="opacity:0;"></i>x</a>
+<div class="container">
+  <section class="module">
 
+  <header class="top-bar">
+
+    <div class="left">
+      <h1>Gilbert JS</h1>
     </div>
-    <div id="toggle-wrapper">
-    <div id="chat-wrapper">
-    <div class="chat-box"id="chat-box">
-        <div class="message-box left-img">
-            <div class="picture">
-                <img src="http://www.themakersquare.com/assets/team/gilbert-668140176436e2178c329c7ab730a68b.jpg" title="user name" /> <span class="time">1 mins</span>
 
-            </div>
-            <div class="message"> 
-                <p>Hey Matt what are you stuck on?</p>
-            </div>
-        </div>
-        <div class="message-box right">
-            <div class="message message-right"> 
+    <div class="right">
 
-                <p>Well I am really struggling with...</p>
-            </div>
-        </div>
-        <div class="message-box left-img">
-            <div class="picture">
-                <img src="http://www.themakersquare.com/assets/team/gilbert-668140176436e2178c329c7ab730a68b.jpg" title="user name" /> <span class="time">0 mins</span>
-
-            </div>
-            <div class="message"> 
-                <p>Did you Bundle install ?</p>
-            </div>
-        </div>
-        <div class="message-box right">
-            <div class="message message-right"> 
-
-                <p>Well I am really struggling with...</p>
-            </div>
-        </div>
-        <div class="message-box left-img">
-            <div class="picture">
-                <img src="http://www.themakersquare.com/assets/team/gilbert-668140176436e2178c329c7ab730a68b.jpg" title="user name" /> <span class="time">0 mins</span>
-
-            </div>
-            </div>
-            <div class="message"> 
-                <p>Did you Bundle install ?</p>
-            </div>
-        </div>
-
-        
-        </div>
-        <div class="enter-message">
-        
-            <input type="text" placeholder="Enter your message.." />
-
-        </div>
-        </div>
+      <span id="chat-close"><img src="http://site-marketing-images.s3.amazonaws.com/2013/odinproject/img/close.png"></span>
     </div>
-</div>    
 
+  </header>
+
+  <ol class="discussion">
+    <li class="other">
+      <div class="avatar">
+        <img src="http://www.gravatar.com/avatar/44d05cf62687c3489b863e4677414ca6?s=36" />
+      </div>
+      <div class="messages">
+        <p>Hey budy what are you struggling with?</p>
+        
+          <time datetime="2014-22-14T14:10">Gilbert • 4 mins</time>
+      </div>
+    </li>
+    <li class="self">
+      <div class="avatar">
+        <img src="http://www.gravatar.com/avatar/9499e17466ab100d9b4b14b382fe6f29?s=36" />
+      </div>
+      <div class="messages">
+        <p>For sure!</p>
+        
+        <time datetime="2014-22-14T14:11">3 mins</time>
+      </div>
+    </li>
+    <li class="self">
+      <div class="avatar">
+        <img src="http://www.gravatar.com/avatar/9499e17466ab100d9b4b14b382fe6f29?s=36" />
+      </div>
+      <div class="messages">
+        <p>That makes sense.</p>
+        
+        <time datetime="2014-22-14T14:12">2 mins</time>
+<!--         this is html5 feature <href ="http://www.w3schools.com/tags/att_time_datetime.asp"> -->
+
+      </div>
+    </li>
+    <li class="other">
+      <div class="avatar">
+        <img src="http://www.gravatar.com/avatar/44d05cf62687c3489b863e4677414ca6?s=36" />
+      </div>
+      <div class="messages">
+        <p>this is some information on that <a href="http://haml.info/">here</a></p>
+      
+          <time datetime="2014-22-14T14:14">Gilbert • 0 mins</time>
+      </div>
+    </li>
+  </ol>
+  <div class="enter-message">
+        <input type="text" placeholder="Enter your message.." />
+    </div>
+</section>
+</div>
 
 </body>
+
 </html>
