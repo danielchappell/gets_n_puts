@@ -1,3 +1,4 @@
+
 @import url('http://fonts.googleapis.com/css?family=Open+Sans');
 @import url('http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
 
@@ -62,7 +63,6 @@ ul {
   transform: translate3d(260px,0,0);
 }
 
-
 .content {
   padding: 30px 80px;
 }
@@ -97,7 +97,6 @@ h2 {
   font-size: 18px;
   margin: 0 5px;
 }
-
 
 /* stuff*/
 
@@ -141,7 +140,7 @@ h2 {
 }
 #swipeme #sm-chat-nav{
   z-index:2;
-  
+
 }
 #swipeme #sm-util-nav{
   position:absolute;
@@ -205,9 +204,9 @@ h2 {
 #sm-chat-nav{
   height:100%;
   overflow:auto;
-  
+
 }
-#sm-chat-nav ul li img{
+#sm-chat-nav ul li a:before{
  content:url('http://www.gravatar.com/avatar/741f1590c13bb96b2507947c39fa1c7e?s=32');
 }
 #sm-chat-nav ul{
@@ -220,7 +219,7 @@ h2 {
 #sm-chat-nav ul li{
   padding:4px 0 3px 0;
 }
-#sm-chat-nav ul li a:last-child{
+#sm-chat-nav ul li a:after{
  content:url('http://site-marketing-images.s3.amazonaws.com/2013/odinproject/img/grn.png');
 
 }
@@ -231,5 +230,3 @@ h2 {
   position:absolute;
   bottom:0;
 }
-
-
