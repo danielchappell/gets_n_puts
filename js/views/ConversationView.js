@@ -14,7 +14,7 @@ var ConversationView = Backbone.View.extend({
 
   initialize: function(){
     this.$el.html(this.chatTemplate(this.model.attributes.partnerObject.attributes));
-    this.$el.appendTo('.container');
+    this.$el.appendTo('.content');
     this.listenTo(this.collection, 'add', this.render);
   },
 
@@ -33,6 +33,7 @@ var ConversationView = Backbone.View.extend({
       $(that.collectionEL).append(message.$el);
       }
     });
+    $(this.collectionEL).scrollTop($(this.collectionEL).offset().top);
   },
 
 
