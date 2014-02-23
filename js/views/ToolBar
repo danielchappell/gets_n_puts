@@ -1,11 +1,46 @@
 
 var dan = {
-  firstName: "Joseph Chappell",
+  personName: "Joseph Chappell",
   gitHubId: "photonerddan",
-  gravitarId: "http://www.gravatar.com/avatar/426b9a1c8077d92fb7a15a757d8a85da?s=36"
+  gravatarId: "http://www.gravatar.com/avatar/426b9a1c8077d92fb7a15a757d8a85da?s=30"
 },
-var matt = {
-  firstName: "Matt Van Dusen",
+ matt = {
+  personName: "Matt Van Dusen",
   gitHubId: "imagineux",
-  gravitarId: "https://1.gravatar.com/avatar/9499e17466ab100d9b4b14b382fe6f29?s=36"
+  gravatarId: "https://1.gravatar.com/avatar/9499e17466ab100d9b4b14b382fe6f29?s=30"
+},
+bill = {
+  personName: "Bill Fienberg",
+  gitHubId: "billfienberg",
+  gravatarId: "https://0.gravatar.com/avatar/6a3b08042f0eddaa9f2ba323e13ceb33?s=30"
+},
+gilad = {
+  personName: "Gilad Salmon",
+  gitHubId: "GilUpstream",
+  gravatarId: "https://0.gravatar.com/avatar/6a3b08042f0eddaa9f2ba323e13ceb33?s=30"
+},
+kathryn = {
+  personName: "Kathryn Beaty",
+  gitHubId: "kabeaty",
+  gravatarId: "https://0.gravatar.com/avatar/6a3b08042f0eddaa9f2ba323e13ceb33?s=30"
+},
+denton = {
+  personName: "Matt Denton",
+  gitHubId: "mddenton",
+  gravatarId: "https://0.gravatar.com/avatar/6a3b08042f0eddaa9f2ba323e13ceb33?s=30"
+},
+patrick = {
+  personName: "Patrick Brennan",
+  gitHubId: "ulbanata",
+  gravatarId: "https://0.gravatar.com/avatar/6a3b08042f0eddaa9f2ba323e13ceb33?s=30"
+},
+beth= {
+  personName: "Bethany Nagel",
+  gitHubId: "bethanynagel",
+  gravatarId: "https://0.gravatar.com/avatar/6a3b08042f0eddaa9f2ba323e13ceb33?s=30"
+},
+brad = {
+  personName: "Brad Hubbard",
+  gitHubId: "bhubbard98",
+  gravatarId: "https://0.gravatar.com/avatar/6a3b08042f0eddaa9f2ba323e13ceb33?s=30"
 }

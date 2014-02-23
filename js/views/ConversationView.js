@@ -39,7 +39,8 @@ var ConversationView = Backbone.View.extend({
 
   events: {
     'keypress .send': 'sendOnEnter',
-    'click .top-bar': 'toggleChat'
+    'click .top-bar': 'toggleChat',
+    'click .chat-close': 'closeWindow'
   },
 
   sendOnEnter: function(e){
@@ -60,6 +61,12 @@ var ConversationView = Backbone.View.extend({
   toggleChat: function(e){
     e.preventDefault();
     this.$(this.collectionEL).toggle();
+  },
+
+  closeWindow: function(e){
+    e.preventDefault();
+    this.remove();
+
   }
 
 });

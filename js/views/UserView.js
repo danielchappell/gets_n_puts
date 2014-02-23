@@ -8,7 +8,7 @@ var UserView = Backbone.View.extend({
 
   className: "online_user",
 
-  template: _.template("<a><img src=<%= gravatarId %> /><span></span></a>"),
+  template: _.template("<a><img src=<%= gravatarId %> /></a>"),
 
   events: {
     "click": "openChatWindow"
@@ -23,10 +23,10 @@ var UserView = Backbone.View.extend({
     this.$el.html(this.template(this.model.attributes));
   },
 
-  openChatWindow: function(){
-    var chatWindow = new ChatRoom({selfObject: self, partnerObject: this.model });
+  openChatWindow: function(person){
+    var chatWindow = new ChatRoom({selfObject: self, partnerObject: person.model });
     var convo = new ConversationView({model: chatWindow, collection: new Conversation});
 
 
   }
-});
+});x
