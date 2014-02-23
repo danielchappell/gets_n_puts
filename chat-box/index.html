@@ -8,81 +8,26 @@
   <title>makersquare chat</title>
 
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="js/app.js"></script>
   <script src="js/prefixfree.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/models/chatRoomModel.js"></script>
+  <script type="text/javascript" src="js/models/MessageModel.js"></script>
+  <script type="text/javascript" src="js/models/UserModel.js"></script>
+  <script type="text/javascript" src="js/collections/Conversation.js"></script>
+  <script type="text/javascript" src="js/views/ConversationView.js"></script>
+  <script type="text/javascript" src="js/views/MessageView.js"></script>
+  <script type="text/javascript" src="js/views/UsersView.js"></script>
+  <script type="text/javascript" src="js/views/UserView.js"></script>
+  <script src="js/app.js"></script>
 
 <!--   documentation on this js <a href="http://leaverou.github.io/prefixfree/"> -->
 
 </head>
 
 <body>
-<div class="container">
-  <section class="module">
-
-  <header class="top-bar">
-
-    <div class="left">
-      <h1>Gilbert JS</h1>
-    </div>
-
-    <div class="right">
-
-      <span id="chat-close"><img src="http://site-marketing-images.s3.amazonaws.com/2013/odinproject/img/close.png"></span>
-    </div>
-
-  </header>
-
-  <ol class="discussion">
-    <li class="other">
-      <div class="avatar">
-        <img src="http://www.gravatar.com/avatar/44d05cf62687c3489b863e4677414ca6?s=36" />
-      </div>
-      <div class="messages">
-        <p>Hey budy what are you struggling with?</p>
-        
-          <time datetime="2014-22-14T14:10">Gilbert • 4 mins</time>
-      </div>
-    </li>
-    <li class="self">
-      <div class="avatar">
-        <img src="http://www.gravatar.com/avatar/9499e17466ab100d9b4b14b382fe6f29?s=36" />
-      </div>
-      <div class="messages">
-        <p>For sure!</p>
-        
-        <time datetime="2014-22-14T14:11">3 mins</time>
-      </div>
-    </li>
-    <li class="self">
-      <div class="avatar">
-        <img src="http://www.gravatar.com/avatar/9499e17466ab100d9b4b14b382fe6f29?s=36" />
-      </div>
-      <div class="messages">
-        <p>That makes sense.</p>
-        
-        <time datetime="2014-22-14T14:12">2 mins</time>
-<!--         this is html5 feature <href ="http://www.w3schools.com/tags/att_time_datetime.asp"> -->
-
-      </div>
-    </li>
-    <li class="other">
-      <div class="avatar">
-        <img src="http://www.gravatar.com/avatar/44d05cf62687c3489b863e4677414ca6?s=36" />
-      </div>
-      <div class="messages">
-        <p>this is some information on that <a href="http://haml.info/">here</a></p>
-      
-          <time datetime="2014-22-14T14:14">Gilbert • 0 mins</time>
-      </div>
-    </li>
-  </ol>
-  <div class="enter-message">
-        <input type="text" placeholder="Enter your message.." />
-    </div>
-</section>
-</div>
-
+  <div class="container"></div>
 </body>
 
 </html>
