@@ -463,6 +463,9 @@ table {
   overflow: hidden;
   display: flex;
 }
+.discussion li:last-child {
+  margin-bottom: 40px;
+}
 .discussion li:last-child:after {
   height:20px;
   width: 100%;
@@ -533,7 +536,7 @@ table {
     padding:9px 12px;
     background:#FFF;
     border-top: 1px solid #999;
-    border-bottom: 1px solid #999; 
+    border-bottom: 1px solid #999;
     margin-top: 25px;
     position: absolute;
     bottom: 1px;

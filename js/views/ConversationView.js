@@ -33,7 +33,7 @@ var ConversationView = Backbone.View.extend({
       $(that.collectionEL).append(message.$el);
       }
     });
-    $(this.collectionEL).scrollTop($(this.collectionEL).offset().top);
+    $(this.collectionEL).scrollTop($(this.collectionEL + ' li:last-child').offset().top);
   },
 
 
