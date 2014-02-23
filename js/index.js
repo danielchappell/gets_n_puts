@@ -1,48 +1,46 @@
 $(document).ready(function() {
 
 
-  function openSidebar() {
-    $("#swipe").addClass('isOpen');
-  }
+  // function openSidebar() {
+  //   $("#swipe").addClass('isOpen');
+  // }
 
-  function closeSidebar() {
-    $("#swipe").removeClass('isOpen');
-  }
+  // function closeSidebar() {
+  //   $("#swipe").removeClass('isOpen');
+  // }
 
-  $('#swipe').hammer().on('dragleft', function(e) {
-    e.preventDefault();
-    closeSidebar();
-  });
+  // $('#swipe').hammer().on('dragleft', function(e) {
+  //   e.preventDefault();
+  //   closeSidebar();
+  // });
 
-  $('#swipeme').hammer().on('dragright', function(e) {
-    e.preventDefault();
-    openSidebar();
-  });
+  // $('#swipeme').hammer().on('dragright', function(e) {
+  //   e.preventDefault();
+  //   openSidebar();
+  // });
 
-  $('#swipe').on('click', function(e) {
-    if($('#swipe').hasClass('isOpen')) {
-      e.preventDefault();
-      closeSidebar();
-    }
-  });
+  // $('#swipe').on('click', function(e) {
+  //   if($('#swipe').hasClass('isOpen')) {
+  //     e.preventDefault();
+  //     closeSidebar();
+  //   }
+  // });
 
-  $('#swipeme').on('click', function(e) {
-    e.stopPropagation();
-    e.preventDefault();
+  // $('#swipeme').on('click', function(e) {
+  //   e.stopPropagation();
+  //   e.preventDefault();
 
-    if($('#swipe').hasClass('isOpen')) {
-      closeSidebar();
-    } else {
-      openSidebar();
-    }
+  //   if($('#swipe').hasClass('isOpen')) {
+  //     closeSidebar();
+  //   } else {
+  //     openSidebar();
+  //   }
 
-  });
+  // });
 
   FastClick.attach(document.body);
 
 });
-
-$(function(){
   var dan = new User({
     personName: "Joseph Chappell",
     gitHubId: "photonerddan",
@@ -54,6 +52,8 @@ $(function(){
     gravatarId: "https://1.gravatar.com/avatar/9499e17466ab100d9b4b14b382fe6f29?s=30"
   })
 
+$(function(){
+
   currently_online = new UsersView([dan, matt]);
 
   var chatRoom = new ChatRoom({ selfObject: self, partnerObject: matt });
@@ -63,3 +63,5 @@ $(function(){
 
   chatWindow.render();
 });
+
+currently_online = new UsersView([dan, matt]);

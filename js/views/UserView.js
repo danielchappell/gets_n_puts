@@ -11,7 +11,7 @@ var UserView = Backbone.View.extend({
   template: _.template("<a><img src=<%= gravatarId %> /><span></span></a>"),
 
   events: {
-    'click li': 'openChatWindow'
+    "click": "openChatWindow"
   },
 
   initialize: function(){
@@ -24,7 +24,7 @@ var UserView = Backbone.View.extend({
   },
 
   openChatWindow: function(){
-    var chatWindow = new chatRoom({selfObject: self, partnerObject: this.model });
+    var chatWindow = new ChatRoom({selfObject: self, partnerObject: this.model });
     var convo = new ConversationView({model: chatWindow, collection: new Conversation});
 
 

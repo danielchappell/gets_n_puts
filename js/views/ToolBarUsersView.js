@@ -24,7 +24,6 @@ var UsersView = Backbone.View.extend({
       var view = new UserView({model: user});
       view.render();
       that.$el.append(view.$el);
-
     });
   }
 });
