@@ -463,6 +463,10 @@ table {
   overflow: hidden;
   display: flex;
 }
+.discussion li:last-child:after {
+  height:20px;
+  width: 100%;
+}
 .discussion .avatar {
   width: 40px;
   position: relative;
@@ -522,19 +526,14 @@ table {
   color: #ccc;
 }
 
-/*
-@keyframes pulse {
-  from { opacity: 0; }
-  to { opacity: 0.5; }
-}*/
 
 .enter-message input {
-    width: 234px;
+    width: 258px;
     border:none;
     padding:9px 12px;
     background:#FFF;
     border-top: 1px solid #999;
-    /* border-bottom: 1px solid #999; */
+    border-bottom: 1px solid #999; 
     margin-top: 25px;
     position: absolute;
     bottom: 1px;
@@ -542,4 +541,13 @@ table {
     z-index: 2;
 }
 input { outline: none; }
+
+/*off canvas side bar*/
+#utility-nav{
+  position: absolute;
+  bottom: 0;
+}
+
+
+
 

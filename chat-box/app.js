@@ -12,7 +12,8 @@ $(window).load(function(){
             $('#toggle-close').animate({opacity:0},500)
         }
                   )
-    
+    $(function() {    $('.discussion').scrollTop($('.discussion').height());
+});
     $('#close').click(function(){
         $(this).parent().fadeOut()
     })
@@ -24,5 +25,8 @@ $(window).load(function(){
 
 
   });
+  $('.discussion').animate({
+    scrollTop: $('.discussion li:last-child').offset().top + 'px'
+}, 1000);
 });
 
