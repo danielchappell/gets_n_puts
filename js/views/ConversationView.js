@@ -2,7 +2,7 @@
 
 var ConversationView = Backbone.View.extend({
 
-  className: 'convowrap',
+  className: 'inner-wrap',
 
   tagName: 'div',
 
@@ -14,7 +14,7 @@ var ConversationView = Backbone.View.extend({
 
   initialize: function(){
     this.$el.html(this.chatTemplate(this.model.attributes.partnerObject.attributes));
-    this.$el.appendTo('.content');
+    this.$el.appendTo('.convowrap');
     this.listenTo(this.collection, 'add', this.render);
   },
 
