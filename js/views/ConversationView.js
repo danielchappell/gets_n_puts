@@ -19,7 +19,6 @@ var ConversationView = Backbone.View.extend({
   render: function(){
     var that = this;
     this.$('.discussion').html('');
-
     this.collection.each(function(message){
       if(message.attributes.sender.attributes.gitHubId === that.model.attributes.selfObject.attributes.gitHubId ){
         var message = new MessageView({model: message, className: 'self'})
@@ -31,9 +30,9 @@ var ConversationView = Backbone.View.extend({
         message.render();
         that.$('.discussion').append(message.$el);
       }
+      this.$('.discussion').scrollTop($('.discussion li:last-child').offset().top);
     });
-    this.$('discussion').scrollTop(this.$('.discussion li:last-child').offset().top);
-  },
+},
 
 
   events: {
@@ -44,16 +43,17 @@ var ConversationView = Backbone.View.extend({
 
   sendOnEnter: function(e){
     if( e.keyCode == 13 ){
-      if( this.$('input').val() ){
+      if( this.$('.send').val() ){
       this.sendMessage();
       }
     }
   },
 
   sendMessage: function(){
-    send = new Message({ sender: self, receiver: this.model.attributes.partnerObject, content: this.$('input').val() });
+    console.log(this)
+    send = new Message({ sender: self, receiver: this.model.attributes.partnerObject, content: this.$('.send').val() });
     this.collection.add(send);
-    this.$('input').val('');
+    this.$('.send').val('');
   },
 
   toggleChat: function(e){
@@ -61,6 +61,9 @@ var ConversationView = Backbone.View.extend({
     this.$('.discussion').toggle();
   },
 
-  closeWindow: function(e){}
+  closeWindow: function(e){
+   e.preventDefault();
+   this.remove();
+ }
 
 });

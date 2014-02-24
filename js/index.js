@@ -104,8 +104,8 @@ $(function(){
   },
   michael = {
     personName: "Michael Young",
-    gitHubId: "bhubbard98",
-    gravatarId: "https://1.gravatar.com/avatar/68257ca48c6ff275bd7a6c737d67cf95?s=38"
+    gitHubId: "mjyoung",
+    gravatarId: "https://0.gravatar.com/avatar/741f1590c13bb96b2507947c39fa1c7e?s=38"
   },
   neil = {
     personName: "Neil Mithipati",
