@@ -111,7 +111,7 @@ h2 {
   color:#1189d9;
 }
 #main-nav-titles{
- margin-top: 10px; 
+ margin-top: 10px;
 }
 
 #swipeme {
@@ -164,6 +164,11 @@ h2 {
 #swipeme #sm-chat-nav{
   z-index:2;
 
+}
+
+#sm-chat-nav ul li a img{
+  height: 36px;
+  width: 36px;
 }
 #swipeme #sm-util-nav{
   position:absolute;
@@ -273,8 +278,8 @@ h2 {
     height: 360px;
     width: 280px;
   }
-::-webkit-scrollbar { 
-    display: none; 
+::-webkit-scrollbar {
+    display: none;
 }
 </style>
 
@@ -283,21 +288,24 @@ h2 {
 
 <body>
 
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-   <script src="js/prefixfree.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+   <script src="javascripts/prefixfree.min.js"></script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js" type="text/javascript"></script>
-  <script type="text/javascript" src="js/app.js"></script>
-  <script type="text/javascript" src="js/models/chatRoom.js"></script>
-  <script type="text/javascript" src="js/models/MessageModel.js"></script>
-  <script type="text/javascript" src="js/models/UserModel.js"></script>
-  <script type="text/javascript" src="js/collections/Conversation.js"></script>
-  <script type="text/javascript" src="js/collections/Users.js"></script>
-  <script type="text/javascript" src="js/views/ConversationView.js"></script>
-  <script type="text/javascript" src="js/views/MessageView.js"></script>
-  <script type="text/javascript" src="js/views/ToolBarUsersView.js"></script>
-  <script type="text/javascript" src="js/views/UserView.js"></script>
+  <script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js
+'></script>
+  <script type="text/javascript" src="javascripts/app.js"></script>
+  <script type="text/javascript" src="javascripts/models/chatRoom.js"></script>
+  <script type="text/javascript" src="javascripts/models/MessageModel.js"></script>
+  <script type="text/javascript" src="javascripts/models/UserModel.js"></script>
+  <script type="text/javascript" src="javascripts/collections/Conversation.js"></script>
+  <script type="text/javascript" src="javascripts/collections/Users.js"></script>
+  <script type="text/javascript" src="javascripts/views/ConversationView.js"></script>
+  <script type="text/javascript" src="javascripts/views/MessageView.js"></script>
+  <script type="text/javascript" src="javascripts/views/ToolBarUsersView.js"></script>
+  <script type="text/javascript" src="javascripts/views/UserView.js"></script>
+  <script type='text/javascript' src="javascripts/index.js"></script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/fastclick/0.6.10/fastclick.min.js'></script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/hammer.js/1.0.5/jquery.hammer.min.js'></script>
 <div class="container">
@@ -348,11 +356,15 @@ h2 {
       </div>
     </div>
     <div class='content'><div class='convowrap'></div></div>
+    <div id='log_in' style='margin-left: 100px;'>
+        <label>Name<input type="text" name='name'></label><br>
+        <label>gravatarURL<input type="text" name='gravatarURL'></label><br>
+        <button id='join_chat'>Join Chat</button>
+    </div>
   </div>
 </div>
 </div>
 
-<script src="js/index.js"></script>
 
 
 </body>
