@@ -2,7 +2,7 @@
 
 var express = require('express'),
 app = express();
-io = require('socket.io').listen(app.listen(5000)),
+io = require('socket.io').listen(app.listen(process.env.PORT || 5000)),
 loggedON = [],
 sockets = {};
 
