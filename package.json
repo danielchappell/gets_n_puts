@@ -1,0 +1,25 @@
+{
+  "name": "Chat5000",
+  "version": "0.1.0",
+  "description": "The best node chat app on the planet!",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~3.4.8",
+    "socket.io": "~0.9.16"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/photonerddan/gets_n_puts.git"
+  },
+  "author": "Joseph Chappell, Matthew Van Dusen",
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/photonerddan/gets_n_puts/issues"
+  },
+  "homepage": "https://github.com/photonerddan/gets_n_puts"
+}
