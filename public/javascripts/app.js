@@ -15,7 +15,7 @@ var ChatApp = Backbone.View.extend({
     }
   },
 
-  server: io.connect('http://198.186.15.32')
+  server: io.connect('window.location.hostname')
 
   // form_submit: function(e){
   //   e.preventDefault();

@@ -2,7 +2,7 @@
 
 var express = require('express'),
 app = express();
-io = require('socket.io').listen(app.listen(8080)),
+io = require('socket.io').listen(app.listen(5000)),
 redisClient = require('redis'),
 loggedON = [],
 sockets = {};
