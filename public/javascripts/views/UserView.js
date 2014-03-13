@@ -39,7 +39,14 @@ var UserView = Backbone.View.extend({
   },
 
   openChatWindow: function(){
-    if ( window.openChats.where({gravatarURL: this.model.attributes.gravatarURL}).length < 1 ){
+    var that = this;
+    var chat_open = false;
+    window.openChats.each(function(chat_window){
+      if (chat_window.attributes.partnerObject.attributes.gravatarURL === that.model.attributes.gravatarURL){
+        chat_open = true;
+      }
+    });
+    if ( !chat_open ){
       var chatWindow = new ChatRoom({selfObject: self, partnerObject: this.model });
       openChats.add(chatWindow);
       return new ConversationView({model: chatWindow, collection: new Conversation() });

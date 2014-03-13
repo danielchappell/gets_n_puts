@@ -21,6 +21,9 @@ var ConversationView = Backbone.View.extend({
       that.$('.top-bar').addClass('new-message');
       }
     });
+    window.app.server.on('user_offline', function(){
+      that.collection.add({sender: 'images/server_network.png', content: 'This user is no longer online.'});
+    })
   },
 
   render: function(){

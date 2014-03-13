@@ -24,6 +24,17 @@ io.sockets.on('connection', function(client){
     loggedON.push({'name': name, 'gravatarURL': gravatarURL})
     client.broadcast.emit('refresh_users');
 
+    client.on('message', function(msg, rgravatars, sgravatar){
+
+      for (var i = 0; i < rgravatars.length; i++) {
+        if ( sockets.hasOwnProperty(rgravatars[i]) ) {
+          sockets[rgravatars[i]]['client'].emit('message', { msg: msg, sender: sgravatar });
+        }
+        else {
+          client.emit('user_offline');
+        }
+      }
+    });
     client.on('disconnect', function(){
       for( var i = 0; i < loggedON.length; i++) {
         if (loggedON[i]['gravatarURL'] === gravatarURL) {
@@ -34,14 +45,6 @@ io.sockets.on('connection', function(client){
       client.broadcast.emit('refresh_users');
     });
   });
-client.on('message', function(msg, rgravatars, sgravatar){
-  console.log('msg: ' + msg );
-  console.log('sender: ' + sgravatar);
-  console.log('reciever: ' + rgravatars);
-  for (var i = 0; i < rgravatars.length; i++) {
-    sockets[rgravatars[i]]['client'].emit('message', { msg: msg, sender: sgravatar });
-  }
-});
 });
 
 
