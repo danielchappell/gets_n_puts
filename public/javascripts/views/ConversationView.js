@@ -49,14 +49,14 @@ var ConversationView = Backbone.View.extend({
     'keypress .send': 'sendOnEnter',
     'click .top-bar': 'toggleChat',
     'click .chat-close': 'closeWindow',
-    'click .discussion, .send, .top-bar': 'removeFlash',
-    'keypress .send': 'removeFlash'
+    'click .discussion, .send, .top-bar': 'removeFlash'
   },
 
   sendOnEnter: function(e){
     if( e.keyCode == 13 ){
       if( this.$('.send').val() ){
       this.sendMessage();
+      this.removeFlash();
       }
     }
   },
