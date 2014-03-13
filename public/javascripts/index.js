@@ -3,7 +3,6 @@ window.app = new ChatApp();
 $(document).ready(function() {
   $('#log_in #join_chat').on('click', function(e){
     e.preventDefault();
-    console.log('trying to work');
     window.app.server.emit('join', $("#log_in input[name='name']").val(), $("#log_in input[name='gravatarURL']").val() );
     window.self = new User({
       name: $("#log_in input[name='name']").val(),

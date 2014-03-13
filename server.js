@@ -24,13 +24,15 @@ io.sockets.on('connection', function(client){
     loggedON.push({'name': name, 'gravatarURL': gravatarURL})
     client.broadcast.emit('refresh_users');
 
-    // client.on('disconnect', function(){
-    //   for( var = i; i < loggedON.length; i++) {
-    //     if loggedON[i]['gravatarURL'] === gravatarURL
-    //   }
-    //   delete loggedON[gravatarURL];
-    //   client.broadcast.emit('refresh_users');
-    // });
+    client.on('disconnect', function(){
+      for( var i = 0; i < loggedON.length; i++) {
+        if (loggedON[i]['gravatarURL'] === gravatarURL) {
+           loggedON.splice(i, 1);
+        }
+      }
+      delete sockets[gravatarURL];
+      client.broadcast.emit('refresh_users');
+    });
   });
 client.on('message', function(msg, rgravatars, sgravatar){
   console.log('msg: ' + msg );

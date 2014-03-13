@@ -18,6 +18,7 @@ var UsersView = Backbone.View.extend({
     this.render();
     window.app.server.on('refresh_users', function(){
       that.collection.fetch({reset: true});
+      console.log(that.collection);
       that.render();
     });
   },
