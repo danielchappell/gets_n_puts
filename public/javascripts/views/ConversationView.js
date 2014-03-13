@@ -49,7 +49,8 @@ var ConversationView = Backbone.View.extend({
     'keypress .send': 'sendOnEnter',
     'click .top-bar': 'toggleChat',
     'click .chat-close': 'closeWindow',
-    'click .discussion, .send, .top-bar': 'removeFlash'
+    'click .discussion, .send, .top-bar': 'removeFlash',
+    'keypress .send': 'removeFlash'
   },
 
   sendOnEnter: function(e){
