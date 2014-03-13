@@ -17,7 +17,8 @@ var ConversationView = Backbone.View.extend({
     this.listenTo(this.collection, 'add', this.render);
     window.app.server.on('message', function(data){
       if (that.model.attributes.partnerObject.attributes.gravatarURL === data.sender ){
-      that.collection.add({sender: data.sender, content: data.msg})
+      that.collection.add({sender: data.sender, content: data.msg});
+      that.$('.top-bar').addClass('new-message');
       }
     });
   },
@@ -26,7 +27,7 @@ var ConversationView = Backbone.View.extend({
     var that = this;
     this.$('.discussion').html('');
     this.collection.each(function(message){
-      if(message.sender === that.model.attributes.selfObject.attributes.gravatarURL ){
+      if(message.attributes.sender === that.model.attributes.selfObject.attributes.gravatarURL ){
         var message = new MessageView({model: message, className: 'self'})
         message.render();
         that.$('.discussion').append(message.$el);
@@ -44,7 +45,8 @@ var ConversationView = Backbone.View.extend({
   events: {
     'keypress .send': 'sendOnEnter',
     'click .top-bar': 'toggleChat',
-    'click .chat-close': 'closeWindow'
+    'click .chat-close': 'closeWindow',
+    'click .discussion, .send, .top-bar': 'removeFlash'
   },
 
   sendOnEnter: function(e){
@@ -56,9 +58,7 @@ var ConversationView = Backbone.View.extend({
   },
 
   sendMessage: function(){
-    send = new Message({ sender: self.attributes.gravatarURL, receiver: this.model.attributes.partnerObject.attributes.gravatarURL, content: this.$('.send').val() });
-    console.log(send.attributes);
-    this.collection.add(send);
+    send = new Message({ sender: self.attributes.gravatarURL, receiver: this.model.attributes.partnerObject.attributes.gravatarURL, content: this.$('.send').val() });    this.collection.add(send);
     window.app.server.emit('message', send.attributes['content'],[send.attributes['receiver']], send.attributes['sender'])
     this.$('.send').val('');
   },
@@ -70,7 +70,13 @@ var ConversationView = Backbone.View.extend({
 
   closeWindow: function(e){
    e.preventDefault();
+   window.openChats.remove(this.model);
    this.remove();
- }
+
+ },
+
+  removeFlash: function(e){
+    this.$('.top-bar').removeClass('new-message');
+  }
 
 });

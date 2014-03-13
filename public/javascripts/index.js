@@ -5,9 +5,14 @@ $(document).ready(function() {
     e.preventDefault();
     console.log('trying to work');
     window.app.server.emit('join', $("#log_in input[name='name']").val(), $("#log_in input[name='gravatarURL']").val() );
+    window.self = new User({
+      name: $("#log_in input[name='name']").val(),
+      gravatarURL: $("#log_in input[name='gravatarURL']").val()
+    });
     $("#log_in input[name='name']").val('');
     $("#log_in input[name='gravatarURL']").val('');
-    var toolBar = new UsersView({collection: new Users, url: '/users'})
+    var toolBar = new UsersView({collection: new Users, url: '/users'});
+    window.openChats = new ChatRooms();
   });
 
   function openSidebar() {
