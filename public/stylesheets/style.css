@@ -452,7 +452,7 @@ table {
   list-style: none;
   background: #EEE;
   margin: 0;
-  padding: 0;
+  padding-bottom: 40px;
   border: 1px solid #999;
   max-height:320px;
   min-height: 270px;

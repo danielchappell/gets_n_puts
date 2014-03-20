@@ -8,13 +8,12 @@ var ConversationView = Backbone.View.extend({
 
   chatTemplate: _.template("<section class='conversation'><header class='top-bar'><div class='left'><h1><%= name %></h1></div><div class='right'><span class='chat-close'><img src='http://site-marketing-images.s3.amazonaws.com/2013/odinproject/img/close.png'></span></div></header><ol class='discussion'></ol><div class='enter-message'><input class='send' type='text' placeholder='Enter your message..' /></div></section>"),
 
-
-
   initialize: function(){
     var that = this;
     this.$el.html(this.chatTemplate(this.model.attributes.partnerObject.attributes));
     this.$el.appendTo('.convowrap');
     this.listenTo(this.collection, 'add', this.render);
+    this.loadPersistentMessages();
     window.app.server.on('message', function(data){
       if (that.model.attributes.partnerObject.attributes.gravatarURL === data.sender ){
       that.collection.add({sender: data.sender, content: data.msg});
@@ -23,26 +22,15 @@ var ConversationView = Backbone.View.extend({
     });
     window.app.server.on('user_offline', function(){
       that.collection.add({sender: 'images/server_network.png', content: 'This user is no longer online.'});
-    })
+    });
   },
 
   render: function(){
-    var that = this;
-    this.$('.discussion').html('');
-    this.collection.each(function(message){
-      if(message.attributes.sender === that.model.attributes.selfObject.attributes.gravatarURL ){
-        var message = new MessageView({model: message, className: 'self'})
-        message.render();
-        that.$('.discussion').append(message.$el);
-      }
-      else{
-        var message = new MessageView({model: message, className: 'other'});
-        message.render();
-        that.$('.discussion').append(message.$el);
-      }
-      this.$('.discussion').scrollTop($('.discussion li:last-child').offset().top);
-    });
-},
+    var newMessage = this.collection.slice(-1)[0];
+    this.appendMessage(newMessage);
+    this.scrollToLastMessage();
+  },
+
 
 
   events: {
@@ -51,6 +39,39 @@ var ConversationView = Backbone.View.extend({
     'click .chat-close': 'closeWindow',
     'click .discussion, .send, .top-bar': 'removeFlash'
   },
+
+  appendMessage: function(message){
+    if(message.attributes.sender === this.model.attributes.selfObject.attributes.gravatarURL ){
+      var message_view = new MessageView({model: message, className: 'self'})
+      message_view.render();
+      this.$('.discussion').append(message_view.$el);
+    }
+    else{
+      var message_view = new MessageView({model: message, className: 'other'});
+      message_view.render();
+      this.$('.discussion').append(message_view.$el);
+        }
+  },
+
+
+  scrollToLastMessage: function(){
+   this.$('.discussion').scrollTop($('.discussion li:last-child').offset().top + $('.discussion').scrollTop() + 50 );
+  },
+
+
+  loadPersistentMessages: function(){
+    var that = this;
+    this.collection.each(function(message){
+      that.appendMessage.call( that, message);
+    });
+    if (this.collection.length > 0){
+    this.scrollToLastMessage();
+    }
+},
+
+
+
+
 
   sendOnEnter: function(e){
     if( e.keyCode == 13 ){
@@ -62,7 +83,8 @@ var ConversationView = Backbone.View.extend({
   },
 
   sendMessage: function(){
-    send = new Message({ sender: self.attributes.gravatarURL, receiver: this.model.attributes.partnerObject.attributes.gravatarURL, content: this.$('.send').val() });    this.collection.add(send);
+    send = new Message({ sender: self.attributes.gravatarURL, receiver: this.model.attributes.partnerObject.attributes.gravatarURL, content: this.$('.send').val() });
+    this.collection.add(send);
     window.app.server.emit('message', send.attributes['content'],[send.attributes['receiver']], send.attributes['sender'])
     this.$('.send').val('');
   },
