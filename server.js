@@ -21,15 +21,12 @@ app.get('/', function(req, res){
 });
 
 
-app.get('/users', function(req, res){
-  res.json(loggedON);
-});
-
 io.sockets.on('connection', function(client){
   client.on('join', function(name, gravatarURL){
     sockets[gravatarURL] = {'name': name, 'client': client};
     loggedON.push({'name': name, 'gravatarURL': gravatarURL});
-    client.broadcast.emit('refresh_users');
+    client.emit('current_users', loggedON);
+    client.broadcast.emit('user_logged_on', name, gravatarURL);
 
     client.on('open_chat', function(rgravatars, sgravatar){
       var conversation_key = rgravatars.concat(sgravatar).sort().join('');
@@ -70,8 +67,8 @@ io.sockets.on('connection', function(client){
            loggedON.splice(i, 1);
         }
       }
+      client.broadcast.emit('user_logged_off', name, gravatarURL);
       delete sockets[gravatarURL];
-      client.broadcast.emit('refresh_users');
     });
   });
 });

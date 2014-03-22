@@ -28,7 +28,6 @@ var UserView = Backbone.View.extend({
           var new_convo = that.openChatWindow();
           new_convo.$('.top-bar').addClass('new-message');
           new_convo.$('.discussion').toggle();
-          new_convo.collection.add({ sender: data.sender, content: data.msg });
         }
       }
     });

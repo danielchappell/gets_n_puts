@@ -11,21 +11,32 @@ var UsersView = Backbone.View.extend({
 
   initialize: function(){
     var that = this;
-    this.listenTo(this.collection, 'add', this.render);
-    this.listenTo(this.collection, 'reset', this.render);
-    this.listenTo(this.collection, 'remove', this.render);
-    this.collection.fetch();
-    this.render();
-    window.app.server.on('refresh_users', function(){
-      that.collection.fetch({reset: true});
-      console.log(that.collection);
-      that.render();
+    window.app.server.on('current_users', function(loggedON){
+    that.initialRender(loggedON);
+    });
+
+    window.app.server.on('user_logged_on', function(name, gravatarURL){
+      var model = new User({ name: name, gravatarURL: gravatarURL });
+      that.collection.add(model);
+      var view = new UserView({model: model});
+      view.render();
+      that.$el.append(view.$el);
+    });
+
+    window.app.server.on('user_logged_off', function(name, gravatarURL){
+      that.collection.each(function(user){
+        if (gravatarURL === user.attributes.gravatarURL) {
+          that.collection.remove(user);
+          user.destroy();
+        }
+      });
     });
   },
 
-  render: function(){
+  initialRender: function(currently_online){
     var that = this;
     this.$el.html('');
+    this.collection.add(currently_online);
     this.collection.each(function(user){
       var view = new UserView({model: user});
       view.render();

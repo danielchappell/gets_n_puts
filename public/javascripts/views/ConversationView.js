@@ -15,7 +15,6 @@ var ConversationView = Backbone.View.extend({
     this.listenTo(this.collection, 'add', this.render);
     this.loadPersistentMessages();
     window.app.server.on('previous_chat', function(messages){
-      console.log(messages);
       for(var i = 0; i < messages.length; i++) {
         var messageArray = messages[i].split('***');
         that.collection.add({ sender: messageArray[0], content: messageArray[1]});
@@ -101,9 +100,11 @@ var ConversationView = Backbone.View.extend({
 
   closeWindow: function(e){
    e.preventDefault();
-   window.openChats.remove(this.model);
+   this.model.destroy();
+   this.collection.each(function(model){
+    model.destroy();
+   });
    this.remove();
-
  },
 
   removeFlash: function(e){
