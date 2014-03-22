@@ -14,6 +14,14 @@ var ConversationView = Backbone.View.extend({
     this.$el.appendTo('.convowrap');
     this.listenTo(this.collection, 'add', this.render);
     this.loadPersistentMessages();
+    window.app.server.on('previous_chat', function(messages){
+      console.log(messages);
+      for(var i = 0; i < messages.length; i++) {
+        var messageArray = messages[i].split('***');
+        that.collection.add({ sender: messageArray[0], content: messageArray[1]});
+      }
+    });
+    window.app.server.emit('open_chat', [this.model.attributes.partnerObject.attributes.gravatarURL], self.attributes.gravatarURL);
     window.app.server.on('message', function(data){
       if (that.model.attributes.partnerObject.attributes.gravatarURL === data.sender ){
       that.collection.add({sender: data.sender, content: data.msg});
@@ -55,7 +63,7 @@ var ConversationView = Backbone.View.extend({
 
 
   scrollToLastMessage: function(){
-   this.$('.discussion').scrollTop($('.discussion li:last-child').offset().top + $('.discussion').scrollTop() + 50 );
+   this.$('.discussion').scrollTop($('.discussion li:last-child').offset().top + $('.discussion').scrollTop() + 40  );
   },
 
 
@@ -68,9 +76,6 @@ var ConversationView = Backbone.View.extend({
     this.scrollToLastMessage();
     }
 },
-
-
-
 
 
   sendOnEnter: function(e){

@@ -3,7 +3,7 @@ var UsersView = Backbone.View.extend({
 
   el: '#sm-chat-nav ul',
 
-  collection: new Users,
+  collection: new Users(),
 
   // events: {
   // 'click #submit_form':'form_submit'
