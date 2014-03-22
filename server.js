@@ -3,11 +3,20 @@
 
 var express = require('express');
 var redis = require('redis');
-var redisClient = redis.createClient('6379', '127.0.0.1');
 var app = express();
 var io = require('socket.io').listen(app.listen(process.env.PORT || 5000));
 var loggedON = [];
 var sockets = {};
+
+
+if (process.env.REDISTOGO_URL) {
+  var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+  var redisClient = redis.createClient(rtg.port, rtg.hostname);
+  redisClient.auth(rtg.auth.split(":")[1]);
+}
+else {
+  var redisClient = redis.createClient();
+}
 
 
 redisClient.on("error", function (err) {
