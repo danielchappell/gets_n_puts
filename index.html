@@ -357,11 +357,17 @@ h2 {
       </div>
     </div>
     <div class='content'><div class='convowrap'></div></div>
-    <div id='log_in' style='margin-left: 100px;'>
-        <label>Name<input type="text" name='name'></label><br>
-        <label>gravatarURL<input type="text" name='gravatarURL'></label><br>
-        <button id='join_chat'>Join Chat</button>
-    </div>
+   <span id="signinButton">
+     <span
+       class="g-signin"
+       data-callback="signinCallback"
+       data-clientid="1027427116765-7114tc83a6it3cctema5av8oeuuc1a0n.apps.googleusercontent.com"
+       data-cookiepolicy="single_host_origin"
+       data-theme='light'
+       data-scope="profile">
+     </span>
+   </span>
+   <!-- <div id="sign_out"></div> -->
   </div>
 </div>
 </div>

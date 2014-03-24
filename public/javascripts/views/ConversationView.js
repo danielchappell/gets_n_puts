@@ -6,7 +6,7 @@ var ConversationView = Backbone.View.extend({
 
   tagName: 'div',
 
-  chatTemplate: _.template("<section class='conversation'><header class='top-bar'><div class='left'><h1><%= name %></h1></div><div class='right'><span class='chat-close'><img src='http://site-marketing-images.s3.amazonaws.com/2013/odinproject/img/close.png'></span></div></header><ol class='discussion'></ol><div class='enter-message'><input class='send' type='text' placeholder='Enter your message..' /></div></section>"),
+  chatTemplate: _.template("<section class='conversation'><header class='top-bar'><div class='left'><h1><%= name %></h1></div><div class='right'><div class='chat-close'><img src='http://site-marketing-images.s3.amazonaws.com/2013/odinproject/img/close.png'></div></div></header><ol class='discussion'></ol><div class='enter-message'><input class='send' type='text' placeholder='Enter your message..' /></div></section>"),
 
   initialize: function(){
     var that = this;
@@ -14,6 +14,7 @@ var ConversationView = Backbone.View.extend({
     this.$el.appendTo('.convowrap');
     this.listenTo(this.collection, 'add', this.render);
     this.loadPersistentMessages();
+    console.log(this.model.attributes.partnerObject.attributes);
     window.app.server.on('previous_chat', function(messages){
       for(var i = 0; i < messages.length; i++) {
         var messageArray = messages[i].split('***');
@@ -30,6 +31,37 @@ var ConversationView = Backbone.View.extend({
     window.app.server.on('user_offline', function(){
       that.collection.add({sender: 'images/server_network.png', content: 'This user is no longer online.'});
     });
+    window.app.server.on('incoming_message', function(conversation_members, typist, bool){
+      console.log(conversation_members)
+      var conversation_partner = [that.model.attributes.partnerObject.attributes.gravatarURL];
+      for ( var i = 0; i < conversation_members.length; i++ ) {
+        if ( conversation_members[i] === window.self.attributes.gravatarURL ) {
+          conversation_members.splice(i, 1);
+        }
+      }
+      conversation_members = conversation_members.sort();
+      conversation_partner = conversation_partner.sort();
+      for ( var i = 0; i < conversation_members.length; i) {
+        for ( var j = 0; j < conversation_partner.length; j ) {
+          if ( conversation_members[i] != conversation_partner[j]){
+            return;
+          }
+          i++;
+          j++;
+        }
+      }
+      if ( bool ) {
+        if ( that.$('.discussion .incoming').length === 0 ) {
+          var typingNotification = "<li class='incoming'><div class='avatar'><img src='" + typist.gravatarURL + "'/></div><div class='messages'><p>" + typist.name + " is typing...</p></div></li>";
+          that.$('.discussion').append(typingNotification);
+          that.scrollToLastMessage();
+        }
+      }
+      else {
+        that.$('.incoming').remove()
+        that.scrollToLastMessage();
+      }
+    });
   },
 
   render: function(){
@@ -42,8 +74,9 @@ var ConversationView = Backbone.View.extend({
 
   events: {
     'keypress .send': 'sendOnEnter',
-    'click .top-bar': 'toggleChat',
+    'keyup .send': 'emitTypingNotification',
     'click .chat-close': 'closeWindow',
+    'click .top-bar': 'toggleChat',
     'click .discussion, .send, .top-bar': 'removeFlash'
   },
 
@@ -96,10 +129,14 @@ var ConversationView = Backbone.View.extend({
   toggleChat: function(e){
     e.preventDefault();
     this.$('.discussion').toggle();
+    if( $('.discussion').attr('display') != "none" ) {
+      this.scrollToLastMessage();
+    }
   },
 
   closeWindow: function(e){
    e.preventDefault();
+   e.stopPropagation();
    this.model.destroy();
    this.collection.each(function(model){
     model.destroy();
@@ -109,6 +146,16 @@ var ConversationView = Backbone.View.extend({
 
   removeFlash: function(e){
     this.$('.top-bar').removeClass('new-message');
+  },
+
+  emitTypingNotification: function(e){
+    console.log(this.$('.send'));
+    if ( this.$('.send').val() != ""){
+    window.app.server.emit( 'user_typing', [this.model.attributes.partnerObject.attributes.gravatarURL], self.attributes, true );
+    }
+    else {
+    window.app.server.emit( 'user_typing', [this.model.attributes.partnerObject.attributes.gravatarURL], self.attributes, false );
+    }
   }
 
 });

@@ -580,6 +580,64 @@ input { outline: none; }
   animation:         pulse 500ms ease alternate infinite; /* IE 10+ */
 }
 
+#sign_out{
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  height: 8%;
+  width: 8%;
+  content: "Revoke Access";
+  border: 1px solid black;
+}
+
+#signinButton{
+  position: absolute;
+  top: 20%;
+  left: 10%;
+}
+
+.discussion .incoming{
+  margin-bottom: 0px;
+  margin-left: -5;
+  padding-left: 0px;
+  padding-bottom: 0px;
+}
+
+  @-webkit-keyframes pulse_animation {
+    0% { -webkit-transform: scale(1); }
+    40% { -webkit-transform: scale(1); }
+    50% { -webkit-transform: scale(1.03);}
+    60% { -webkit-transform: scale(1); }
+    100% { -webkit-transform: scale(1); }
+  }
+
+.discussion .incoming .messages {
+  background: none;
+  box-shadow: none;
+  color: rgba(55, 55, 55, .6);
+  -webkit-animation-name: 'pulse_animation';
+  -webkit-animation-duration: 2500ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-name: 'pulse_animation';
+  animation-duration: 2500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;-webkit-animation-name: 'pulse_animation';
+  -moz-animation-name: 'pulse_animation';
+  -moz-animation-duration: 5000ms;
+  -moz-transform-origin:70% 70%;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -o-animation-name: 'pulse_animation';
+  -o-animation-duration: 5000ms;
+  -o-transform-origin:70% 70%;
+  -o-animation-iteration-count: infinite;
+  -o-animation-timing-function: linear;
+}
+.discussion .incoming .avatar img {
+  border-radius: 3px;
+  opacity: 70% !important;
+}
 
 
 
