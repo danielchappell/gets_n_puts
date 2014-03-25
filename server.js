@@ -82,7 +82,6 @@ io.sockets.on('connection', function(client){
     });
 
     client.on('message', function(msg, rgravatars, sgravatar){
-      console.log()
       var conversation_members = rgravatars.concat(sgravatar);
       var conversation_key = conversation_members.sort().join('');
       var value_string = sgravatar + "***" + msg;

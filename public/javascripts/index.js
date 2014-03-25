@@ -36,6 +36,8 @@ $(function() {
          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
        })();
 
+ window.titleNotification = { pageTitle: $('html title').html(), notified: false};
+
   function openSidebar() {
     $("#swipe").addClass('isOpen');
   }

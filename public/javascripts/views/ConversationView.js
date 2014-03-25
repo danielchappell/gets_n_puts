@@ -14,7 +14,6 @@ var ConversationView = Backbone.View.extend({
     this.$el.appendTo('.convowrap');
     this.listenTo(this.collection, 'add', this.render);
     this.loadPersistentMessages();
-    console.log(this.model.attributes.partnerObject.attributes);
     window.app.server.on('previous_chat', function(messages){
       for(var i = 0; i < messages.length; i++) {
         var messageArray = messages[i].split('***');
@@ -26,13 +25,13 @@ var ConversationView = Backbone.View.extend({
       if (that.model.attributes.partnerObject.attributes.gravatarURL === data.sender ){
       that.collection.add({sender: data.sender, content: data.msg});
       that.$('.top-bar').addClass('new-message');
+      that.titleAlert();
       }
     });
     window.app.server.on('user_offline', function(){
       that.collection.add({sender: 'images/server_network.png', content: 'This user is no longer online.'});
     });
     window.app.server.on('incoming_message', function(conversation_members, typist, bool){
-      console.log(conversation_members)
       var conversation_partner = [that.model.attributes.partnerObject.attributes.gravatarURL];
       for ( var i = 0; i < conversation_members.length; i++ ) {
         if ( conversation_members[i] === window.self.attributes.gravatarURL ) {
@@ -77,7 +76,7 @@ var ConversationView = Backbone.View.extend({
     'keyup .send': 'emitTypingNotification',
     'click .chat-close': 'closeWindow',
     'click .top-bar': 'toggleChat',
-    'click .discussion, .send, .top-bar': 'removeFlash'
+    'click .discussion, .send, .top-bar': 'removeNotifications'
   },
 
   appendMessage: function(message){
@@ -114,7 +113,7 @@ var ConversationView = Backbone.View.extend({
     if( e.keyCode == 13 ){
       if( this.$('.send').val() ){
       this.sendMessage();
-      this.removeFlash();
+      this.removeNotifications();
       }
     }
   },
@@ -124,6 +123,7 @@ var ConversationView = Backbone.View.extend({
     this.collection.add(send);
     window.app.server.emit('message', send.attributes['content'],[send.attributes['receiver']], send.attributes['sender'])
     this.$('.send').val('');
+    this.emitTypingNotification();
   },
 
   toggleChat: function(e){
@@ -144,18 +144,47 @@ var ConversationView = Backbone.View.extend({
    this.remove();
  },
 
-  removeFlash: function(e){
+  removeNotifications: function(e){
     this.$('.top-bar').removeClass('new-message');
+    if ( window.titleNotification.notified ){
+       this.clearTitleNotification();
+    }
   },
 
   emitTypingNotification: function(e){
-    console.log(this.$('.send'));
     if ( this.$('.send').val() != ""){
     window.app.server.emit( 'user_typing', [this.model.attributes.partnerObject.attributes.gravatarURL], self.attributes, true );
     }
     else {
     window.app.server.emit( 'user_typing', [this.model.attributes.partnerObject.attributes.gravatarURL], self.attributes, false );
     }
-  }
+  },
 
+  clearTitleNotification: function() {
+    window.clearAlert();
+    $('html title').html( window.titleNotification.pageTitle );
+    window.titleNotification.notified = false;
+  },
+
+  titleAlert: function(){
+    if (!window.titleNotification.notified){
+      var alert = "Pending ** " + this.model.attributes.partnerObject.attributes.name;
+      var setAlert = function(){
+        if ( $('html title').html() === window.titleNotification.pageTitle ) {
+          $('html title').html(alert);
+        }
+        else {
+          $('html title').html( window.titleNotification.pageTitle );
+        }
+      };
+
+        var titleAlert = setInterval(setAlert, 2200);
+
+      window.clearAlert = function(){
+        clearInterval(titleAlert);
+      }
+
+      window.titleNotification.notified = true;
+    }
+  }
 });

@@ -452,14 +452,15 @@ table {
   list-style: none;
   background: #EEE;
   margin: 0;
-  padding-bottom: 40px;
+  padding-bottom: 70px;
   border: 1px solid #999;
   max-height:320px;
   min-height: 270px;
   overflow: auto;
 }
-.discussion li {
-  padding: 0.5rem;
+.conversation .discussion li {
+  padding: 0.4rem;
+  margin: 0;
   overflow: hidden;
   display: flex;
 }
@@ -514,12 +515,13 @@ table {
 
 .messages {
   background: white;
-  padding: 10px;
+  line-height: 1rem;
+  padding: 5px 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .messages p {
   font-size: 0.8rem;
-  margin: 0 0 0.2rem 0;
+  margin: 0 0 0.1rem 0;
 }
 .messages time {
   font-size: 0.7rem;
@@ -596,11 +598,12 @@ input { outline: none; }
   left: 10%;
 }
 
-.discussion .incoming{
-  margin-bottom: 0px;
-  margin-left: -5;
-  padding-left: 0px;
-  padding-bottom: 0px;
+.conversation .discussion .incoming {
+  position: absolute;
+  top: 277px;
+  left: 0;
+  margin:0;
+  padding-left: 0;
 }
 
   @-webkit-keyframes pulse_animation {
@@ -614,29 +617,28 @@ input { outline: none; }
 .discussion .incoming .messages {
   background: none;
   box-shadow: none;
+  padding-top: 5px;
   color: rgba(55, 55, 55, .6);
   -webkit-animation-name: 'pulse_animation';
-  -webkit-animation-duration: 2500ms;
+  -webkit-animation-duration: 2650ms;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
   animation-name: 'pulse_animation';
-  animation-duration: 2500ms;
+  animation-duration: 2650ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;-webkit-animation-name: 'pulse_animation';
   -moz-animation-name: 'pulse_animation';
-  -moz-animation-duration: 5000ms;
-  -moz-transform-origin:70% 70%;
+  -moz-animation-duration: 2650ms;
   -moz-animation-iteration-count: infinite;
   -moz-animation-timing-function: linear;
   -o-animation-name: 'pulse_animation';
-  -o-animation-duration: 5000ms;
-  -o-transform-origin:70% 70%;
+  -o-animation-duration: 2650ms;
   -o-animation-iteration-count: infinite;
   -o-animation-timing-function: linear;
 }
-.discussion .incoming .avatar img {
+.discussion .incoming .avatar {
+  width: 28px;
   border-radius: 3px;
-  opacity: 70% !important;
 }
 
 
