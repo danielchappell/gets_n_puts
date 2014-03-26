@@ -39,8 +39,6 @@ io.sockets.on('connection', function(client){
         loggedIN = true;
       }
     }
-    console.log(loggedIN);
-    console.log(loggedON);
     if(!loggedIN) {
       sockets[gravatarURL] = {'name': name, 'client': [client]};
       loggedON.push({'name': name, 'gravatarURL': gravatarURL});
@@ -55,12 +53,12 @@ io.sockets.on('connection', function(client){
 
     client.on('open_chat', function(rgravatars, sgravatar){
       var conversation_key = rgravatars.concat(sgravatar).sort().join('');
-      redisClient.lrange(conversation_key, 0, -1, function(err, reply){
+      redisClient.lrange(conversation_key, 0, -1, function(err, messages){
         if (err) {
           console.log ('ERROR: ' + err);
         }
         else {
-          client.emit('previous_chat', reply);
+          client.emit('previous_chat', messages);
         }
       });
     });
@@ -90,7 +88,6 @@ io.sockets.on('connection', function(client){
         ['ltrim', conversation_key, 0, 199],
         ['expire', conversation_key, 604800]
         ]).exec(function(err, replies){
-          console.log(replies);
         });
       for (var i = 0; i < rgravatars.length; i++) {
         if ( sockets.hasOwnProperty(rgravatars[i]) ) {

@@ -12,18 +12,18 @@ var ConversationView = Backbone.View.extend({
     var that = this;
     this.$el.html(this.chatTemplate(this.model.attributes.partnerObject.attributes));
     this.$el.appendTo('.convowrap');
-    this.listenTo(this.collection, 'add', this.render);
-    this.loadPersistentMessages();
     window.app.server.on('previous_chat', function(messages){
       for(var i = 0; i < messages.length; i++) {
         var messageArray = messages[i].split('***');
         that.collection.add({ sender: messageArray[0], content: messageArray[1]});
       }
+      that.loadPersistentMessages();
     });
     window.app.server.emit('open_chat', [this.model.attributes.partnerObject.attributes.gravatarURL], self.attributes.gravatarURL);
     window.app.server.on('message', function(data){
       if (that.model.attributes.partnerObject.attributes.gravatarURL === data.sender ){
       that.collection.add({sender: data.sender, content: data.msg});
+      that.render();
       that.$('.top-bar').addClass('new-message');
       that.titleAlert();
       }
@@ -94,7 +94,7 @@ var ConversationView = Backbone.View.extend({
 
 
   scrollToLastMessage: function(){
-   this.$('.discussion').scrollTop($('.discussion li:last-child').offset().top + $('.discussion').scrollTop() + 40  );
+   this.$('.discussion').scrollTop($('.discussion li:last-child').offset().top + $('.discussion').scrollTop()  );
   },
 
 
@@ -104,6 +104,7 @@ var ConversationView = Backbone.View.extend({
       that.appendMessage.call( that, message);
     });
     if (this.collection.length > 0){
+      console.log(this.collection);
     this.scrollToLastMessage();
     }
 },
@@ -121,6 +122,7 @@ var ConversationView = Backbone.View.extend({
   sendMessage: function(){
     send = new Message({ sender: self.attributes.gravatarURL, receiver: this.model.attributes.partnerObject.attributes.gravatarURL, content: this.$('.send').val() });
     this.collection.add(send);
+    this.render();
     window.app.server.emit('message', send.attributes['content'],[send.attributes['receiver']], send.attributes['sender'])
     this.$('.send').val('');
     this.emitTypingNotification();
@@ -138,10 +140,10 @@ var ConversationView = Backbone.View.extend({
    e.preventDefault();
    e.stopPropagation();
    this.model.destroy();
-   this.collection.each(function(model){
-    model.destroy();
-   });
+   this.collection.reset();
+   window.app.server.removeAllListeners();
    this.remove();
+   console.log('on close', this.collection);
  },
 
   removeNotifications: function(e){

@@ -6,10 +6,10 @@ var UserView = Backbone.View.extend({
 
   className: "online_user",
 
-  template: _.template("<a><img src=<%= gravatarURL %> /></a>"),
+  template: _.template('<a class="open-chat"><img src=<%= gravatarURL %> /></a>'),
 
   events: {
-    "click": "openChatWindow"
+    "click .open-chat": "openChatWindow"
   },
 
   initialize: function(){
