@@ -85,13 +85,18 @@ io.sockets.on('connection', function(client){
       var value_string = sgravatar + "***" + msg;
       redisClient.multi([
         ['rpush', conversation_key, value_string],
-        ['ltrim', conversation_key, 0, 199],
+        ['ltrim', conversation_key, -199, -1],
         ['expire', conversation_key, 604800]
         ]).exec(function(err, replies){
+          if (err){
+            console.log(err);
+          }
+          else {
+            console.log(replies);
+          }
         });
       for (var i = 0; i < rgravatars.length; i++) {
         if ( sockets.hasOwnProperty(rgravatars[i]) ) {
-          console.log(sockets[rgravatars[i]]['client']);
           for( var j = 0; j < sockets[rgravatars[i]]['client'].length; j++ ){
             sockets[rgravatars[i]]['client'][j].emit('message', { msg: msg, sender: sgravatar });
           }

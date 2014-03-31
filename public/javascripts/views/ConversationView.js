@@ -6,7 +6,7 @@ var ConversationView = Backbone.View.extend({
 
   tagName: 'div',
 
-  chatTemplate: _.template("<section class='conversation'><header class='top-bar'><div class='left'><h1><%= name %></h1></div><div class='right'><div class='chat-close'><img src='http://site-marketing-images.s3.amazonaws.com/2013/odinproject/img/close.png'></div></div></header><ol class='discussion'></ol><div class='enter-message'><input class='send' type='text' placeholder='Enter your message..' /></div></section>"),
+  chatTemplate: _.template("<section class='conversation'><header class='top-bar'><div class='left'><h1><%= name %></h1></div><div class='right'><div class='chat-close'><img src='http://site-marketing-images.s3.amazonaws.com/2013/odinproject/img/close.png'></div></div></header><ol class='discussion'></ol><div class='enter-message'><input class='send' type='text' placeholder='Enter your message..' /><label for='parley-file_upload'><i class='fa fa-camera-retro'></i></div><input type='file' name='parley-file_upload' class='parley-file_upload' /></section>"),
 
   initialize: function(){
     var that = this;
@@ -53,12 +53,14 @@ var ConversationView = Backbone.View.extend({
         if ( that.$('.discussion .incoming').length === 0 ) {
           var typingNotification = "<li class='incoming'><div class='avatar'><img src='" + typist.gravatarURL + "'/></div><div class='messages'><p>" + typist.name + " is typing...</p></div></li>";
           that.$('.discussion').append(typingNotification);
+          that.$('')
           that.scrollToLastMessage();
         }
       }
       else {
         that.$('.incoming').remove()
         that.scrollToLastMessage();
+
       }
     });
   },
@@ -76,7 +78,10 @@ var ConversationView = Backbone.View.extend({
     'keyup .send': 'emitTypingNotification',
     'click .chat-close': 'closeWindow',
     'click .top-bar': 'toggleChat',
-    'click .discussion, .send, .top-bar': 'removeNotifications'
+    'click .discussion, .send, .top-bar': 'removeNotifications',
+    'change .parley-file_upload': 'fileUpload',
+    // 'click .discussion li img': 'imageModal',
+    // 'click #parley-modal': 'removeModal'
   },
 
   appendMessage: function(message){
@@ -179,7 +184,6 @@ var ConversationView = Backbone.View.extend({
           $('html title').html( window.titleNotification.pageTitle );
         }
       };
-
         var titleAlert = setInterval(setAlert, 2200);
 
       window.clearAlert = function(){
@@ -188,5 +192,21 @@ var ConversationView = Backbone.View.extend({
 
       window.titleNotification.notified = true;
     }
-  }
+  },
+
+  fileUpload: function(){
+    var file = this.$('.parley-file_upload').get(0).files[0];
+    window.parley_uploadFile(file, [this.model.attributes.partnerObject.attributes.gravatarURL], self.attributes.gravatarURL, this);
+
+    },
+
+  //  imageModal: function(e){
+  //   var modal = '<div id="parley-modal-wrapper"><div id="parley-modal"'+ $(e.currentTarget.outerHTML) + '</div></div>'
+  //   $('body').append(modal);
+  // },
+
+  // removeModal: function(){
+  //   ('#parley-modal-wrapper').remove();
+  // }
+
 });

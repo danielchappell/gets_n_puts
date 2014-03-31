@@ -641,6 +641,23 @@ input { outline: none; }
   border-radius: 3px;
 }
 
+.discussion .messages p img {
+  max-height: 180px;
+  max-width: 150px;
+}
 
+.conversation .enter-message label, .parley-file_upload {
+  position: absolute;
+  z-index: 10;
+  bottom: 9px;
+  left: 230px;
+  font-size: 23px;
+}
+
+ .parley-file_upload {
+  width: 40px;
+  opacity: 0;
+  z-index: 11;
+}
 
 
